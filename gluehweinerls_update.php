@@ -32,7 +32,7 @@
                 $preis = $_POST['basispreis'];
 
                 /*** the sql query ***/
-                $sql = "UPDATE gluehwein 
+                $sql = "UPDATE Gluehwein 
                         SET 
                             Wein_Id = $wein, 
                             Zutat_Id = $zutat, 

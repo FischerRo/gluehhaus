@@ -28,7 +28,7 @@
                 $preis = $_POST['basispreis'];
 
                 /*** the sql query ***/
-                $sql = "INSERT INTO gluehwein (Wein_Id, Zutat_Id, Name, Basispreis) 
+                $sql = "INSERT INTO Gluehwein (Wein_Id, Zutat_Id, Name, Basispreis) 
                             VALUES ($wein, $zutat, '$gluehwein_name', $preis)";
 
 
