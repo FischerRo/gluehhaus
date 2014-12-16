@@ -26,7 +26,8 @@
 
 
 		        /*** Create Bestellung ***/
-		        $sql = "('$bestellzeit', $kassierer_id)";
+		        $sql = "INSERT INTO Bestellung (Bestellzeit, Kassierer_Id)
+		        			VALUES ('$bestellzeit', $kassierer_id)";
 
                	/*** run the query ***/
                 if(mysql_query($sql))
