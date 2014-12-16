@@ -9,13 +9,46 @@
     /*** check for valid database connection ***/
     if($db)
     {
-        /*** the SQL query to return the required columns & rows ***/
-        $sql = "SELECT Nachname as Kassierer FROM Kassierer";
+        /*** the SQL query to select last 5 Bestellpositionen ***/
+        $sql = "SELECT 
+                    K.Nachname as Kassierer, 
+                    (Select count(*)
+                        From Bestellung
+                        inner join Kassierer K2 using (Kassierer_Id)
+                        where K2.Kassierer_Id = K.Kassierer_Id) as '#Bestellungen',
+                    count(BP.Bestellung_Id) as '#BP', 
+                    sum(BP.Anzahl*G.Basispreis) as Umsatz, 
+                    cast(sum(BP.Anzahl*G.Basispreis)*K.Provision/100 as Decimal(5,2)) as Gehalt
+                FROM Kassierer K
+                INNER JOIN Bestellung B
+                    ON K.Kassierer_Id = B.Kassierer_Id
+                INNER JOIN Bestellposition BP
+                    ON B.Bestellung_Id = BP.Bestellung_Id
+                INNER JOIN Gluehwein G
+                    ON G.Wein_Id = BP.Wein_Id AND G.Zutat_Id = BP.Zutat_Id
+                GROUP BY K.Kassierer_Id";
 
 
         if(isset($_GET['filter'])){
             $filter = $_GET['filter'];
-            $sql = "SELECT * FROM Kassierer";
+            $sql = "SELECT 
+                        K.Nachname as Kassierer, 
+                        (Select count(*)
+                            From Bestellung
+                            inner join Kassierer K2 using (Kassierer_Id)
+                            where K2.Kassierer_Id = K.Kassierer_Id) as '#Bestellungen',
+                        count(BP.Bestellung_Id) as '#BP', 
+                        sum(BP.Anzahl*G.Basispreis) as Umsatz, 
+                        cast(sum(BP.Anzahl*G.Basispreis)*K.Provision/100 as Decimal(5,2)) as Gehalt
+                    FROM Kassierer K
+                    INNER JOIN Bestellung B
+                        ON K.Kassierer_Id = B.Kassierer_Id
+                    INNER JOIN Bestellposition BP
+                        ON B.Bestellung_Id = BP.Bestellung_Id
+                    INNER JOIN Gluehwein G
+                    ON G.Wein_Id = BP.Wein_Id AND G.Zutat_Id = BP.Zutat_Id
+                    WHERE K.Nachname like '%$filter%'
+                    GROUP BY K.Kassierer_Id";
 
         };
 

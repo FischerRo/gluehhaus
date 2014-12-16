@@ -25,7 +25,12 @@
                 $zutat = $_GET['zutat_id'];
 
                 /*** the sql query ***/
-                $sql = "DELETE";
+                $sql = "DELETE FROM Gluehwein 
+                        WHERE 
+                            Wein_Id = $wein
+                            AND
+                            Zutat_Id = $zutat
+                        ";
 
 
                 /*** run the query ***/

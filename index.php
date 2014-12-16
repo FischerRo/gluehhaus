@@ -9,19 +9,64 @@
     /*** check for valid database connection ***/
     if($db)
     {
-        /*** the SQL query to select last 10 Bestellpositionen ***/
+        /*** the SQL query to select last 5 Bestellpositionen ***/
         $sql = "SELECT
                     Bestellung_Id,
                     Wein_Id as Wein,
                     Zutat_Id as Zutat, 
                     Anzahl
                 FROM Bestellposition
-                ORDER BY Bestellung_Id DESC";
+                ORDER BY Bestellung_Id DESC
+                LIMIT 10";
 
+        $sql = "SELECT
+                    Bestellung_Id,
+                    Wein.Name as Wein,
+                    Zutat.Name as Zutat, 
+                    Gluehwein.Name as Gluehwein,
+                    Anzahl,
+                    DATE_FORMAT(Bestellzeit, '%e.%m - %T Uhr') AS Bestellzeit, 
+                    Kassierer.Nachname, 
+                    Kassierer.Vorname
+                FROM Bestellposition
+                INNER JOIN Bestellung
+                    USING (Bestellung_Id)
+                INNER JOIN Gluehwein
+                    USING (Wein_Id, Zutat_Id)
+                INNER JOIN Wein
+                    USING(Wein_Id)
+                INNER JOIN Zutat
+                    USING(Zutat_Id)
+                INNER JOIN Kassierer
+                    USING(Kassierer_Id)
+                ORDER BY Bestellzeit DESC
+                LIMIT 10";
 
         if(isset($_GET['filter'])){
-            //TODO: USE FILTER IN SQL STATEMENT
-            echo '<p>FILTER NOT IMPLEMENTED!</p>';
+            $filter = $_GET['filter'];
+            $sql = "SELECT
+                    Bestellung_Id,
+                    Wein.Name as Wein,
+                    Zutat.Name as Zutat, 
+                    Gluehwein.Name as Gluehwein,
+                    Anzahl,
+                    DATE_FORMAT(Bestellzeit, '%e.%m - %T Uhr') AS Bestellzeit, 
+                    Kassierer.Nachname, 
+                    Kassierer.Vorname
+                FROM Bestellposition
+                INNER JOIN Bestellung
+                    USING (Bestellung_Id)
+                INNER JOIN Gluehwein
+                    USING (Wein_Id, Zutat_Id)
+                INNER JOIN Wein
+                    USING(Wein_Id)
+                INNER JOIN Zutat
+                    USING(Zutat_Id)
+                INNER JOIN Kassierer
+                    USING(Kassierer_Id)
+                WHERE Gluehwein.Name like '%$filter%'
+                ORDER BY Bestellzeit DESC
+                LIMIT 10";
         }
 
 

@@ -9,8 +9,13 @@
     /*** check for valid database connection ***/
     if($db)
     {
-        /*** Get all Gluehwein ***/
-        $sql = "SELECT * FROM Wein";
+        /*** the SQL query to select last 5 Bestellpositionen ***/
+        $sql = "SELECT
+                    Wein_Id as Wein,
+                    Zutat_Id as Zutat, 
+                    Name, 
+                    Basispreis as Preis
+                FROM Gluehwein";
 
 
         /*** run the query ***/
