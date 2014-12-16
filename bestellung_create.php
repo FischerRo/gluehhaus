@@ -26,8 +26,7 @@
 
 
 		        /*** Create Bestellung ***/
-		        $sql = "INSERT INTO Bestellung (Bestellzeit, Kassierer_Id)
-		        			VALUES ('$bestellzeit', $kassierer_id)";
+		        $sql = "('$bestellzeit', $kassierer_id)";
 
                	/*** run the query ***/
                 if(mysql_query($sql))
@@ -43,8 +42,7 @@
 			        	$zutat_id = $ids[1];
 			        	$menge = $position['menge'];
 
-			        	$sql_bp = "INSERT INTO Bestellposition (Bestellung_Id, Wein_Id, Zutat_id, Anzahl)
-			        				values ($bestellung, $wein_id, $zutat_id, $menge)";
+			        	$sql_bp = "($bestellung, $wein_id, $zutat_id, $menge)";
 
 					   	/*** run the query ***/
 		                if(mysql_query($sql_bp))

@@ -9,19 +9,11 @@
     /*** check for valid database connection ***/
     if($db)
     {
-        /*** the SQL query to select last 5 Bestellpositionen ***/
-        $sql = "SELECT
-                    Wein_Id,
-                    Zutat_Id,
-                    Name, 
-                    Basispreis
-                FROM Gluehwein";
+        /*** Get all Gluehweine ***/
+        $sql = "SELECT * FROM Wein";
 
-        $sql_kassierer = "SELECT
-				            Kassierer_Id,
-				            Nachname,
-				            Vorname 
-				        FROM Kassierer";
+        /*** Get all Kassierer **/
+        $sql_kassierer = "SELECT * FROM Wein";
 
         /*** run the query ***/
         $result = mysql_query($sql) or die(mysql_error());

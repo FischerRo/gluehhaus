@@ -9,7 +9,7 @@
     /*** check for valid database connection ***/
     if($db)
     {
-        /*** the SQL query to select last 5 Bestellpositionen ***/
+        /*** the SQL queries for Wein and Zutat ***/
         $sql = "SELECT
                     Wein_Id,
                     Name

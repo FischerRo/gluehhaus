@@ -16,21 +16,12 @@
 
         /*** SQL query to get current Gluehwein ***/
         $sql_gluehwein = 
-            "SELECT * 
-             FROM Gluehwein
-             WHERE Wein_Id = $wein_id 
-                AND Zutat_Id = $zutat_id";
+            "";
 
         /*** the SQL queries to get List of Wein and Zutaten ***/
-        $sql = "SELECT
-                    Wein_Id,
-                    Name
-                FROM Wein";
+        $sql = "";
 
-        $sql2 = "SELECT
-                    Zutat_Id,
-                    Name
-                FROM Zutat";
+        $sql2 = "";
 
 
 
