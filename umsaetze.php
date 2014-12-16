@@ -127,8 +127,8 @@
 
                 echo '<tr>';
                 echo '<td align="center">'.$umsatz_row['Kassierer'].'</a></td>';
-                echo '<td align="center">'.$umsatz_row['Anzahl_Bestellungen'].'</td>';
-                echo '<td align="center">'.$umsatz_row['Anzahl_Bestellpositionen'].'</td>';
+                echo '<td align="center">'.$umsatz_row['#Bestellungen'].'</td>';
+                echo '<td align="center">'.$umsatz_row['#BP'].'</td>';
                 echo '<td align="center">'.$umsatz_row['Umsatz'].'</td>';
                 echo '<td align="center">'.$umsatz_row['Gehalt'].'</td>';
                 echo '</tr>';
