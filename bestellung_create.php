@@ -43,7 +43,8 @@
 			        	$zutat_id = $ids[1];
 			        	$menge = $position['menge'];
 
-			        	$sql_bp = "($bestellung, $wein_id, $zutat_id, $menge)";
+			        	$sql_bp = "INSERT INTO Bestellposition (Bestellung_Id, Wein_Id, Zutat_id, Anzahl)
+			        				values ($bestellung, $wein_id, $zutat_id, $menge)";
 
 					   	/*** run the query ***/
 		                if(mysql_query($sql_bp))
